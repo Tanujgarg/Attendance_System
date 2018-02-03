@@ -22,4 +22,5 @@ urlpatterns = [
     path('teacherlogin', teachers_login),
     path('studentlogin', student_login),
     path('', index),
+    path('attendance/', mark_attendance),
 ]

@@ -1,4 +1,4 @@
-<DOCTYPE! html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -101,10 +101,18 @@ body {
     <h1>Login</h1>
      <form action="" method="post" id="" name="">
           {% csrf_token %}
-    <input type="text" value="" placeholder="Your Roll No:" id="username" name="roll_no">
-    <input type="password" value="" placeholder="Your Password" id="password" name="password">
+    <input type="text" value="" placeholder="Your Roll No:" id="username" name="roll_no" required>
+    <input type="password" value="" placeholder="Your Password" id="password" name="password" required>
     <button type="submit" value="submit">Submit</button>
     </form>
 </div>
+<script>
+    window.onload = function (ev) {
+        {% if error %}
+            var a = '{{ error }}'
+        alert(a);
+        {% endif %}
+    }
+</script>
 </body>
 </html>
