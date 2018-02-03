@@ -1,0 +1,110 @@
+<DOCTYPE! html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Teacher login</title>
+  <style>
+body {
+    background: url('http://eskipaper.com/images/black-background-images-3.jpg') no-repeat fixed center center;
+    background-size: cover;
+    font-family: Times New Roman;
+}
+
+.logo {
+    width: 165px;
+    height: 120px;
+    background: url('https://www.gni.edu.in//assets-new/raw/logo.png') no-repeat;
+    margin: 50px auto;
+}
+
+.login-block {
+    width: 320px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    border-top: 5px solid #F9A214;
+    margin: 0 auto;
+}
+
+.login-block h1 {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-block input {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: Times New Roman;
+    padding: 0 20px 0 50px;
+    outline: none;
+}
+
+.login-block input#username {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#username:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password:focus {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input:active, .login-block input:focus {
+    border: 1px solid #F9A214;
+}
+
+.login-block button {
+    width: 100%;
+    height: 40px;
+    background: #F9A214;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #131313;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Times New Roman;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-block button:hover {
+    background: #ff7b81;
+}
+
+  </style>
+</head>
+<body>
+  
+    <div class="logo"></div>
+    <div class="login-block">
+    <h1>Login</h1>
+    <form action="" method="post" id="" name="">
+        {% csrf_token %}
+    <input type="text" value="" placeholder="Your name" id="username" name="name">
+    <input type="password" value="" placeholder="Your password" id="password" name="password">
+    <button type="submit" value="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
