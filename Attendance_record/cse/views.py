@@ -1,13 +1,9 @@
 from django.shortcuts import render
 from .forms import *
 from .models import *
+from .Files.Form_data import *
 
 # Create your views here.
-
-cse1A = [6315003, 6315004, 6315005, 6315006, 6315009, 6315010, 6315011, 6315012, 6315013, 6315014, 6315015, 6315016,
-         6315017, 6315018, 6315021, 6315023, 6315024, 6315025]
-
-cse1B = [6315026, 6315027, 6315028, 6315029]
 
 
 def index(request):
@@ -25,7 +21,7 @@ def teachers_login(request):
             user = Teachers.objects.filter(name=name).first()
             if user:
                 if password == user.password:
-                    request.session['subject'] = user.subject
+                    request.session['name'] = user.name
                     return render(request, 'section.html',)
                 else:
                     return render(request, 'teacherlogin.html', {'form': form,
@@ -64,19 +60,40 @@ def student_login(request):
             print("invalid")
     elif request.method == "GET":
         form = Teachers_login()
-    return render(request, 'studentlogin.html', {'form': form})
+        return render(request, 'studentlogin.html', {'form': form})
 
 
 def mark_attendance(request):
     if request.method == "GET":
+        # print(request.session['name'])
         section = request.GET.get('class')
         print(section)
+        if section == 'cse1':
+            form = Cse1(request.POST)
+            return render(request, 'attendance.html', {'form': form,
+                                                       'data': Cse1_data})
         if section == 'cse1a':
             form = Cse1a(request.POST)
             return render(request, 'attendance.html', {'form': form,
-                                                   'students': cse1A})
+                                                       'data': A1_data})
         elif section == 'cse1b':
             form = Cse1b(request.POST)
             return render(request, 'attendance.html', {'form': form,
-                                                       'students': cse1B})
-
+                                                       'data': A2_data})
+        elif section == 'cse1la':
+            form = Cse1a(request.POST)
+            return render(request, 'attendance.html', {'form': form,
+                                                       'data': A1_data})
+        elif section == 'cse1lb':
+            form = Cse1b(request.POST)
+            return render(request, 'attendance.html', {'form': form,
+                                                       'students': A2_data})
+    elif request.method == "POST":
+        form = Cse1a(request.POST)
+        print("Post")
+        if form.is_valid():
+            print("form valid")
+            for i, j in zip(A1_roll, A_key):
+                status = form.cleaned_data[j]
+                print(status)
+            return render(request, 'attendance.html')

@@ -69,7 +69,8 @@ input[type=checkbox] {
     <div class="container">
         <h1>Student Attendance</h1>
         <div class="sheet">
-     <form action="" method="post" id="" name="">
+     <form method="post" id="" name="">
+     {% csrf_token %}
         <table align="center">
             <thead>
                 <tr>
@@ -80,21 +81,22 @@ input[type=checkbox] {
                 </tr>
             </thead>
             <tbody>
-                {% for i in students %}
+                {% for i,j,k in data %}
             <tr class="student">
                     <td class="name-col">{{ i }}</td>
-                    <td class="name-col">abc</td>
+                    <td class="name-col">{{ j }}</td>
                     <td class="name-col">def</td>
-                    <td class="attend-col"><input type="checkbox" name=""></td>
+                    <td class="attend-col"><input type="checkbox" name="{{ k }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+     <div class="submit">
+            <input type="submit">
+        </div>
         </form>
         </div>
-        <div class="submit">
-            <a href="#"><button class="button1">Submit</button></a>
-        </div>
+
         </div>
 
     </body>
