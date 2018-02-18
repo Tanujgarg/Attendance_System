@@ -25,6 +25,6 @@ Cse1_key = ['Student1', 'Student2', 'Student3', 'Student4', 'Student5', 'Student
             'Student34', 'Student35', 'Student36']
 
 
-A1_data = zip(A1_roll, A1_names, A_key)
-A2_data = zip(A2_roll, A2_names, A_key)
-Cse1_data = zip(Cse1_roll, Cse1_names, Cse1_key)
+A1_data = list(zip(A1_roll, A1_names, A_key))
+A2_data = list(zip(A2_roll, A2_names, A_key))
+Cse1_data = list(zip(Cse1_roll, Cse1_names, Cse1_key))

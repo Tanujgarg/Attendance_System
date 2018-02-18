@@ -1,0 +1,282 @@
+{% load static%}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title title="Student Dashboard">Student Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .button,.button1{
+            background-color: #004445;
+            color: white;
+            width: 200px;
+            height: 60px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #2c7873;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #004445;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color:#021C1E; color: white;">
+<header>
+    <!--<h2 style="float: right;"><a href="#">Logout</a></h2>-->
+</header>
+<center><h1>Student Dashboard</h1></center>
+<h2>{{ user.name }}</h2>
+<h3>{{ user.roll_no }}</h3>
+<center><h3>Overview</h3></center>
+<div style="overflow-x:auto;">
+    <table>
+        <tr>
+            <th></th>
+            <th>WT</th>
+            <th>EIT</th>
+            <th>BIE</th>
+            <th>SE</th>
+            <th>MC</th>
+            <th>CD</th>
+            <th>EIT Lab</th>
+            <th>SE Lab</th>
+            <th>WT Lab</th>
+        </tr>
+        <tr>
+            <td><b>Attended</b></td>
+            <td>{{ wt_present }}</td>
+            <td>{{ eit_present }}</td>
+            <td>{{ bie_present }}</td>
+            <td>{{ se_present }}</td>
+            <td>{{ mc_present }}</td>
+            <td>{{ cd_present }}</td>
+            <td>{{ eit_lab_present }}</td>
+            <td>{{ se_lab_present }}</td>
+            <td>{{ wt_lab_present }}</td>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td>{{ wt_total }}</td>
+            <td>{{ eit_total }}</td>
+            <td>{{ bie_total }}</td>
+            <td>{{ se_total }}</td>
+            <td>{{ mc_total }}</td>
+            <td>{{ cd_total }}</td>
+            <td>{{ eit_lab_total }}</td>
+            <td>{{ se_lab_total }}</td>
+            <td>{{ wt_lab_total }}</td>
+        </tr>
+        <tr>
+            <td><b>Avg.</b></td>
+            <td>{{ wt_avg }}</td>
+            <td>{{ eit_avg }}</td>
+            <td>{{ bie_avg }}</td>
+            <td>{{ se_avg }}</td>
+            <td>{{ mc_avg }}</td>
+            <td>{{ cd_avg }}</td>
+            <td>{{ eit_lab_avg }}</td>
+            <td>{{ se_lab_avg }}</td>
+            <td>{{ wt_lab_avg }}</td>
+        </tr>
+    </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center><input class="button" type="button" name="" value="Show Complete record"></center>
+
+<div class="hidden" id="div1">
+    <div style="overflow-x:auto;">
+        <center><h3>Web Technology</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in wt %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Essential of Information Technology</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in eit %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Mobile Computing</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in mc %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Compiler Design</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in cd %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Software Engineering</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in se %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Business Intelligence and Entrepreneurship </h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in bie %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Web Technology Lab</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in wt_lab %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Essential of Information Technology  Lab</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in eit_lab %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+    <div style="overflow-x:auto;">
+        <center><h3>Software Engineering Lab</h3></center>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Date</th>
+                <th>Is present?</th>
+            </tr>
+            {% for i in se_lab %}
+                <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.status }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <br>
+    </div>
+    <center><input class="button1" type="button" name="" value="Hide Record"></center>
+</div>
+<script type="text/javascript" src={% static 'jquery.js' %}></script>
+<script type="text/javascript">
+    $(".button").click(function(e){
+        $(".button").addClass("hidden");
+        $("#div1").removeClass("hidden");
+    });
+    $(".button1").click(function (e) {
+        $('.button').removeClass("hidden");
+        $("#div1").addClass("hidden");
+
+    });
+</script>
+</body>
+</html>

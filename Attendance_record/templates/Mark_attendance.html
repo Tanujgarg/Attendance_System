@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title title="Select Section">Select Section</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        .button{
+            background-color: #004445;
+            color: white;
+            width: 200px;
+            height: 60px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        #checkbox{
+            width: 20px;
+            height: 20px;
+        }
+
+        tr:nth-child(even){background-color: #004445}
+    </style>
+</head>
+<body style="background-color:#021C1E; color: white;">
+<center><h1>Mark Attendance</h1></center>
+<center><h2>Subject : </h2></center>
+<center><h2>Teacher : </h2></center>
+<center><h2>Date :</h2></center>
+<br>
+<div style="overflow-x:auto;">
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>Is present?</th>
+            </tr>
+            {% if data %}
+                {% for i,j,k in data %}
+                    <tr>
+                    <td>{{ i }}</td>
+                    <td>{{ j }}</td>
+                    <td><input title="" id='checkbox' type="checkbox" name="{{ k }}"></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        <br>
+        <center><input class="button" type="submit" name=""></center>
+    </form>
+</div>
+
+</body>
+</html>

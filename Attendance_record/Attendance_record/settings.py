@@ -25,7 +25,7 @@ SECRET_KEY = '%!&!0zil#4)575k1a(rvlxl8wq#n07inz+ma27+r6aqvv5=sr8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.43.220', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cse.apps.CseConfig',
+    'livesync',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'livesync.core.middleware.DjangoLiveSyncMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = (
+    'livesync.core.middleware.DjangoLiveSyncMiddleware',
+)
 
 ROOT_URLCONF = 'Attendance_record.urls'
 
@@ -105,7 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIES_AGE = 5*60
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
