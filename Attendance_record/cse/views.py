@@ -2,13 +2,11 @@ from django.shortcuts import render, HttpResponse, redirect, render_to_response
 from .forms import *
 from .models import *
 from .Files.Form_data import *
-from django.contrib import messages
-
 # Create your views here.
-
+import datetime
 
 form_class = None
-subject = None
+subject = ''
 is_lab = False
 
 
@@ -72,6 +70,7 @@ def student_login(request):
                     wt_present = wt.filter(status=True).count()
                     try:
                         wt_avg = (wt_present / wt_total) * 100
+                        wt_avg = round(wt_avg, 2)
                     except ZeroDivisionError:
                         wt_avg = 'N.A.'
 
@@ -79,6 +78,7 @@ def student_login(request):
                     cd_present = cd.filter(status=True).count()
                     try:
                         cd_avg = (cd_present / cd_total) * 100
+                        cd_avg = round(cd_avg, 2)
                     except ZeroDivisionError:
                         cd_avg = 'N.A.'
 
@@ -86,6 +86,7 @@ def student_login(request):
                     mc_present = mc.filter(status=True).count()
                     try:
                         mc_avg = (mc_present / mc_total) * 100
+                        mc_avg = round(mc_avg, 2)
                     except ZeroDivisionError:
                         mc_avg = 'N.A.'
 
@@ -93,6 +94,7 @@ def student_login(request):
                     eit_present = eit.filter(status=True).count()
                     try:
                         eit_avg = (eit_present / eit_total) * 100
+                        eit_avg = round(eit_avg, 2)
                     except ZeroDivisionError:
                         eit_avg = 'N.A.'
 
@@ -100,6 +102,7 @@ def student_login(request):
                     se_present = se.filter(status=True).count()
                     try:
                         se_avg = (se_present / se_total) * 100
+                        se_avg = round(se_avg, 2)
                     except ZeroDivisionError:
                         se_avg = 'N.A.'
 
@@ -107,6 +110,7 @@ def student_login(request):
                     bie_present = bie.filter(status=True).count()
                     try:
                         bie_avg = (bie_present / wt_total) * 100
+                        bie_avg = round(bie_avg, 2)
                     except ZeroDivisionError:
                         bie_avg = 'N.A.'
 
@@ -114,6 +118,7 @@ def student_login(request):
                     wt_lab_present = wt_lab.filter(status=True).count()
                     try:
                         wt_lab_avg = (wt_lab_present / wt_lab_total) * 100
+                        wt_lab_avg = round(wt_lab_avg, 2)
                     except ZeroDivisionError:
                         wt_lab_avg = 'N.A.'
 
@@ -121,6 +126,7 @@ def student_login(request):
                     se_lab_present = se_lab.filter(status=True).count()
                     try:
                         se_lab_avg = (se_lab_present / se_lab_total) * 100
+                        se_lab_avg = round(se_lab_avg, 2)
                     except ZeroDivisionError:
                         se_lab_avg = 'N.A.'
 
@@ -128,6 +134,7 @@ def student_login(request):
                     eit_lab_present = eit_lab.filter(status=True).count()
                     try:
                         eit_lab_avg = (eit_lab_present / eit_lab_total) * 100
+                        eit_lab_avg = round(eit_lab_avg, 2)
                     except ZeroDivisionError:
                         eit_lab_avg = 'N.A.'
 
@@ -182,171 +189,183 @@ def student_login(request):
 
 
 def mark_attendance(request):
-    # request.session['name'] = "name"
     global form_class
     global is_lab
-    if request.session.has_key('name'):
-        print(request.session)
-        if request.method == "GET":
-            request.session.flush()
-            # print(request.session['name'])
+    if request.method == "GET":
+        if request.session.has_key('name'):
+            print(request.session['name'])
             section = request.GET.get('class')
-            print(section, request.GET.get('key'))
+            # print(section, request.GET.get('key'))
             if section == 'cse1':
                 form_class = 'cse1'
                 print(section, form_class)
                 form = Cse1(request.POST)
                 return render(request, 'Mark_attendance.html', {'form': form,
-                                                                'data': Cse1_data},)
+                                                                'data': Cse1_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().date()})
             if section == 'cse1a':
 
                 form_class = 'cse1a'
                 form = Cse1a(request.POST)
                 return render(request, 'Mark_attendance.html', {'form': form,
-                                                                'data': A1_data})
+                                                                'data': A1_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().date()})
             elif section == 'cse1b':
 
                 form_class = 'cse1b'
                 form = Cse1b(request.POST)
                 return render(request, 'Mark_attendance.html', {'form': form,
-                                                                'data': A2_data})
+                                                                'data': A2_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().date()})
             elif section == 'cse1la':
                 is_lab = True
                 form_class = 'cse1la'
                 form = Cse1a(request.POST)
                 return render(request, 'Mark_attendance.html', {'form': form,
-                                                                'data': A1_data})
+                                                                'data': A1_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().date()})
             elif section == 'cse1lb':
                 is_lab = True
                 form_class = 'cse1lb'
                 form = Cse1b(request.POST)
                 return render(request, 'Mark_attendance.html', {'form': form,
-                                                                'data': A2_data})
+                                                                'data': A2_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().date()})
 
             else:
-                return redirect("http://127.0.0.1:8000")
-        elif request.method == "POST":
-            if form_class == 'cse1':
-                form = Cse1(request.POST)
-                print("Post")
-                if form.is_valid():
-                    print("form valid")
-                    print(form_class)
-                    for i, j in zip(Cse1_roll, Cse1_key):
-                        status = form.cleaned_data[j]
-                        print(form_class, status)
-                        if subject == 'wt' and not is_lab:
-                            attendance = WT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'eit' and not is_lab:
-                            attendance = EIT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'bie':
-                            attendance = BIE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'se' and not is_lab:
-                            attendance = SE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'mc':
-                            attendance = MC(roll_no=i, status=status)
-                            attendance.save()
-                            print("mc saved")
-                        elif subject == 'cd':
-                            attendance = CD(roll_no=i, status=status)
-                            attendance.save()
-                        else:
-                            return HttpResponse("Attendance failed! please try again")
-                        # print(i, status)
-            if form_class == 'cse1a':
-                form = Cse1a(request.POST)
-                print("Post")
-                if form.is_valid():
-                    print("form valid")
-                    for i, j in zip(A1_roll, A_key):
-                        status = form.cleaned_data[j]
-                        if subject == 'wt' and not is_lab:
-                            attendance = WT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'eit' and not is_lab:
-                            attendance = EIT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'bie':
-                            attendance = BIE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'se' and not is_lab:
-                            attendance = SE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'mc':
-                            attendance = MC(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'cd':
-                            attendance = CD(roll_no=i, status=status)
-                            attendance.save()
-                        else:
-                            return HttpResponse("Attendance failed! please try again")
-            if form_class == 'cse1b':
-                form = Cse1b(request.POST)
-                print("Post")
-                if form.is_valid():
-                    print("form valid")
-                    for i, j in zip(A2_roll, A_key):
-                        status = form.cleaned_data[j]
-                        if subject == 'wt' and not is_lab:
-                            attendance = WT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'eit' and not is_lab:
-                            attendance = EIT(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'bie':
-                            attendance = BIE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'se' and not is_lab:
-                            attendance = SE(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'mc':
-                            attendance = MC(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'cd':
-                            attendance = CD(roll_no=i, status=status)
-                            attendance.save()
-                        else:
-                            return HttpResponse("Attendance failed! please try again")
-            if form_class == 'cse1la':
-                form = Cse1a(request.POST)
-                print("Post")
-                if form.is_valid():
-                    print("form valid")
-                    for i, j in zip(A1_roll, A_key):
-                        status = form.cleaned_data[j]
-                        if subject == 'wt' and is_lab:
-                            attendance = WTLab(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'se' and is_lab:
-                            attendance = SELab(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'eit' and is_lab:
-                            attendance = EITLab(roll_no=i, status=status)
-                            attendance.save()
-                        else:
-                            return HttpResponse("Attendance failed! please try again")
-            if form_class == 'cse1lb':
-                form = Cse1b(request.POST)
-                print("Post")
-                if form.is_valid():
-                    print("form valid")
-                    for i, j in zip(A2_roll, A_key):
-                        status = form.cleaned_data[j]
-                        if subject == 'wt' and is_lab:
-                            attendance = WTLab(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'se' and is_lab:
-                            attendance = SELab(roll_no=i, status=status)
-                            attendance.save()
-                        elif subject == 'eit' and is_lab:
-                            attendance = EITLab(roll_no=i, status=status)
-                            attendance.save()
-                        else:
-                            return HttpResponse("Attendance failed! please try again")
-            print("Saved")
-    return render(request, 'index.html')
-    return redirect('http://127.0.0.1:8000')
+                return redirect("/home")
+        return render(request, 'Error.html', {'login_error': True})
+    elif request.method == "POST":
+        if form_class == 'cse1':
+            form = Cse1(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                print(form_class)
+                for i, j in zip(Cse1_roll, Cse1_key):
+                    status = form.cleaned_data[j]
+                    print(i, status)
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                        print("mc saved")
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        return render(request, 'Error.html', {'error': True})
+                    # print(i, status)
+        if form_class == 'cse1a':
+            form = Cse1a(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A1_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse1b':
+            form = Cse1b(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A2_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse1la':
+            form = Cse1a(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A1_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and is_lab:
+                        attendance = WTLab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and is_lab:
+                        attendance = SELab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and is_lab:
+                        attendance = EITLab(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse1lb':
+            form = Cse1b(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A2_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and is_lab:
+                        attendance = WTLab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and is_lab:
+                        attendance = SELab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and is_lab:
+                        attendance = EITLab(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        return render(request, 'Error.html', {'lab_error': True})
+        request.session.flush()
+        return render(request, 'Error.html', {'success': True})

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title title="Error">Error</title>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% if login_error %}
+<center><h1>You are not logged in!</h1></center>
+    <center><h2>Please wait, you are redirected to Home....</h2></center>
+{% endif %}
+{% if lab_error %}
+<center><h1>You are not Authorised to mark attendance for Lab!</h1></center>
+    <center><h2>Please wait, you are redirected to Home....</h2></center>
+{% endif %}
+{% if error %}
+<center><h1>There may be some problems, please try again</h1></center>
+    <center><h2>Please wait, you are redirected to Home....</h2></center>
+{% endif %}
+{% if success %}
+<center><h1>Attendance successfully Marked!</h1></center>
+    <center><h2>Please wait, you are redirected to Home....</h2></center>
+{% endif %}
+<script>
+    window.onload = function (ev) {
+        setTimeout(function () {
+            window.location.replace("/home")
+
+        }, 5000)
+    }
+</script>
+</body>
+</html>

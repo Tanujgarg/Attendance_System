@@ -23,4 +23,5 @@ urlpatterns = [
     path('studentlogin', student_login),
     path('', index),
     path('attendance/', mark_attendance),
+    path('home', index)
 ]
