@@ -1,6 +1,8 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
     <title title="Select Section">Select Section</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
@@ -33,7 +35,7 @@
         tr:nth-child(even){background-color: #004445}
     </style>
 </head>
-<body style="background-color:#021C1E; color: white;">
+<body style="background-color:#021C1E; color: white;" oncontextmenu="return false;">
 <center><h1>Mark Attendance</h1></center>
 <center><h2>Subject : {{ subject }}</h2></center>
 <center><h2>Teacher : {{ teacher }} </h2></center>

@@ -1,11 +1,13 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Teacher login</title>
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
   <style>
 body {
-    background: url('http://eskipaper.com/images/black-background-images-3.jpg') no-repeat fixed center center;
+    {#background: url('http://eskipaper.com/images/black-background-images-3.jpg') no-repeat fixed center center;#}
     background-size: cover;
     font-family: Times New Roman;
 }
@@ -15,6 +17,7 @@ body {
     height: 120px;
     background: url('https://www.gni.edu.in//assets-new/raw/logo.png') no-repeat;
     margin: 50px auto;
+    display: none;
 }
 
 .login-block {
@@ -94,9 +97,21 @@ body {
 
   </style>
 </head>
-<body>
+<body style="background-color:#021C1E;" oncontextmenu="return false;">
   
-    <div class="logo"></div>
+{#    <div class="logo"></div>#}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
     <div class="login-block">
     <h1>Login</h1>
     <form action="" method="post" id="" name="">

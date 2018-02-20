@@ -11,6 +11,13 @@ class Student_login(forms.Form):
     password = forms.CharField(max_length=255)
 
 
+class Student_Signup(forms.Form):
+    name = forms.CharField(max_length=255)
+    roll_no = forms.CharField(max_length=255)
+    email = forms.CharField(max_length=255)
+    password = forms.CharField(max_length=255)
+
+
 class Cse1a(forms.Form):
     Student1 = forms.BooleanField(initial=False, required=False)
     Student2 = forms.BooleanField(initial=False, required=False)

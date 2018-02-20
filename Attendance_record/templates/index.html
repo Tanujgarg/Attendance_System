@@ -7,12 +7,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
 
     <link href={% static 'bootstrap.min.css' %} rel="stylesheet">
     <style>
 
         body {
-            background: black;
+            background: #021C1E;
             color: #444;
             font-family: "Open Sans", sans-serif;
         }
@@ -44,7 +45,7 @@
         #intro {
             width: 100%;
             height: 60vh;
-            background: #000;
+            background: #021C1E;
             position: relative;
         }
 
@@ -120,15 +121,15 @@
     </style>
 </head>
 
-<body id="body">
+<body style="background-color:#021C1E;" id ="body" oncontextmenu="return false;">
 
 <section id="intro" class="wow fadeIn">
 
     <div class="intro-content">
         <header><h2>CSE Department <span><br>Attendance System</span></h2></header>
         <div>
-            <a href="/teacherlogin" class="btn-get-started scrollto">Login as Teacher</a>
-            <a href="/studentlogin" class="btn-projects scrollto">Login as Student</a>
+            <a title="Click, if you are a Teacher" href="/teacherlogin" class="btn-get-started scrollto">Login as Teacher</a>
+            <a title="Click, if you are a Student " href="/studentlogin" class="btn-projects scrollto">Login as Student</a>
         </div>
     </div>
 

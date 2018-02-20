@@ -23,7 +23,7 @@ def teachers_login(request):
             name = form.cleaned_data['name']
             password = form.cleaned_data['password']
             print(name, password)
-            user = Teachers.objects.filter(name=name).first()
+            user = Teachers.objects.filter(name=name.lower()).first()
             if user:
                 if password == user.password:
                     request.session['name'] = user.name
@@ -369,3 +369,25 @@ def mark_attendance(request):
                         return render(request, 'Error.html', {'lab_error': True})
         request.session.flush()
         return render(request, 'Error.html', {'success': True})
+
+
+
+def student_register(request):
+    if request.method == "POST":
+        print("Post")
+        form = Student_Signup(request.POST)
+        if form.is_valid():
+            print("valid")
+            name = form.cleaned_data['name']
+            roll_no = form.cleaned_data['roll_no']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            print(name, password, email, roll_no)
+            student = Student(name=name, roll_no=roll_no, email=email, password=password)
+            student.save()
+            print("saved")
+            return render(request, 'Error.html', {'signup': True})
+    elif request.method == "GET":
+        print("Get")
+        # return render(request, 'Signup.html')
+    return render(request, 'Signup.html')

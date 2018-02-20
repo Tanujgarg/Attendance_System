@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
     <title title="Student Dashboard">Student Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -33,7 +34,7 @@
         }
     </style>
 </head>
-<body style="background-color:#021C1E; color: white;">
+<body style="background-color:#021C1E; color: white;" oncontextmenu="return false;">
 <header>
     <!--<h2 style="float: right;"><a href="#">Logout</a></h2>-->
 </header>
@@ -105,13 +106,13 @@
         <center><h3>Web Technology</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in wt %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -123,13 +124,13 @@
         <center><h3>Essential of Information Technology</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in eit %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -141,13 +142,13 @@
         <center><h3>Mobile Computing</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in mc %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -159,13 +160,13 @@
         <center><h3>Compiler Design</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in cd %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -177,13 +178,13 @@
         <center><h3>Software Engineering</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in se %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -195,13 +196,13 @@
         <center><h3>Business Intelligence and Entrepreneurship </h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in bie %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -213,13 +214,13 @@
         <center><h3>Web Technology Lab</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in wt_lab %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -231,13 +232,13 @@
         <center><h3>Essential of Information Technology  Lab</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in eit_lab %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>
@@ -249,13 +250,13 @@
         <center><h3>Software Engineering Lab</h3></center>
         <table>
             <tr>
-                <th>Sr. No.</th>
+                <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
                 <th>Date</th>
                 <th>Is present?</th>
             </tr>
             {% for i in se_lab %}
                 <tr>
-                <td>{{ i.id }}</td>
+                <td></td>
                 <td>{{ i.date }}</td>
                 <td>{{ i.status }}</td>
             </tr>

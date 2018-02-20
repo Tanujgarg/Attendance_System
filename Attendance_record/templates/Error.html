@@ -1,10 +1,12 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title title="Error">Error</title>
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
 </head>
-<body>
+<body oncontextmenu="return false;">
 <br>
 <br>
 <br>
@@ -25,6 +27,10 @@
 {% endif %}
 {% if success %}
 <center><h1>Attendance successfully Marked!</h1></center>
+    <center><h2>Please wait, you are redirected to Home....</h2></center>
+{% endif %}
+{% if signup %}
+    <center><h1>Successfully Registered...</h1></center>
     <center><h2>Please wait, you are redirected to Home....</h2></center>
 {% endif %}
 <script>

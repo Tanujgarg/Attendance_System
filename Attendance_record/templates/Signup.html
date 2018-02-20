@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Student login</title>
+  <title title="Sign up">Sign up</title>
     <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
   <style>
 body {
@@ -11,15 +11,13 @@ body {
     background-size: cover;
     font-family: Times New Roman;
 }
-
-.logo {
-    width: 165px;
-    height: 120px;
-    background: url('https://www.gni.edu.in//assets-new/raw/logo.png') no-repeat;
-    margin: 50px auto;
-    display: none;
-}
-
+{#.logo {#}
+{#    width: 165px;#}
+{#    height: 120px;#}
+{#    background: url('https://www.gni.edu.in//assets-new/raw/logo.png') no-repeat;#}
+{#    margin: 50px auto;#}
+{#    #}
+{#}#}
 .login-block {
     width: 320px;
     padding: 20px;
@@ -28,7 +26,6 @@ body {
     border-top: 5px solid #F9A214;
     margin: 0 auto;
 }
-
 .login-block h1 {
     text-align: center;
     color: #000;
@@ -37,7 +34,6 @@ body {
     margin-top: 0;
     margin-bottom: 20px;
 }
-
 .login-block input {
     width: 100%;
     height: 42px;
@@ -50,31 +46,41 @@ body {
     padding: 0 20px 0 50px;
     outline: none;
 }
-
 .login-block input#username {
     background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
     background-size: 16px 80px;
 }
-
 .login-block input#username:focus {
     background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
-
+.login-block input#name {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+.login-block input#name:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+.login-block input#email {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+.login-block input#email:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
 .login-block input#password {
     background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
     background-size: 16px 80px;
 }
-
 .login-block input#password:focus {
     background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
-
 .login-block input:active, .login-block input:focus {
     border: 1px solid #F9A214;
 }
-
 .login-block button {
     width: 100%;
     height: 40px;
@@ -90,15 +96,13 @@ body {
     outline: none;
     cursor: pointer;
 }
-
 .login-block button:hover {
     background: #ff7b81;
 }
-
   </style>
 </head>
 <body style="background-color:#021C1E;" oncontextmenu="return false;">
-  
+
 {#    <div class="logo"></div>#}
 <br>
 <br>
@@ -107,26 +111,17 @@ body {
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-
     <div class="login-block">
-    <h1>Login</h1>
-     <form action="" method="post" id="" name="">
-          {% csrf_token %}
-    <input type="text" value="" placeholder="Your Roll No:" id="username" name="roll_no" required>
-    <input type="password" value="" placeholder="Your Password" id="password" name="password" required>
-    <button type="submit" value="submit">Submit</button>
+    <h1>Sign-up</h1>
+     <form method="post">
+         {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Enter Your Name" id="name" required>
+        <input type="text" name="roll_no" placeholder="Enter Your Roll.No." id="username" required>
+    <input type="text" name="email" placeholder="Enter Your Email-id" id="email" required>
+    <input type="password" name="password" placeholder="Enter Password" id="password" required>
+    <button type="submit">Submit</button>
     </form>
 </div>
-<script>
-    window.onload = function (ev) {
-        {% if error %}
-            var a = '{{ error }}'
-        alert(a);
-        {% endif %}
-    }
-</script>
 </body>
 </html>
