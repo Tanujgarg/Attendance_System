@@ -4,13 +4,13 @@ A1_roll = [6315003, 6315004, 6315005, 6315006, 6315009, 6315010, 6315011, 631501
 A1_names = ['Gurdeep', 'Harmeet', 'Gurkirat', 'Riya', 'Navneet', 'Tanuj', 'Tarun', 'Vasu', 'Anshuman', 'Yogesh',
             'Zibran', 'Abhimanyu', 'Abhishek', 'Abhishek', 'Neha', 'Prerna', 'Priyanka', 'Ashish']
 
-A2_roll = [6315026, 6315027, 6315028, 6315029, 6315036, 6315037, 6315038, 6315039, 6315054, 6315056, 6315061, 6315066,
-           6315067, 6315073, 6315076, 6315651, 6315654, 6315002]
+A2_roll = [6315002, 6315026, 6315027, 6315028, 6315029, 6315036, 6315037, 6315038, 6315039, 6315054, 6315056, 6315061,
+           6315066, 6315067, 6315073, 6315076, 6315651, 6315654]
 
 Cse1_roll = A1_roll + A2_roll
 
-A2_names = ['Anmol', 'Kajal', 'Chiranjeev', 'Dibyajyoti', 'Sabha', 'Sakshi', 'Sakshi', 'Samriti', 'Pankaj', 'Parminder',
-            'Pulkit', 'Yogesh', 'Shubham', 'Simran', 'Vivek', 'Chanchal', 'Swapnil', 'Anmol']
+A2_names = ['anmol', 'Anmol', 'Kajal', 'Chiranjeev', 'Dibyajyoti', 'Sabha', 'Sakshi', 'Sakshi', 'Samriti', 'Pankaj',
+            'Parminder', 'Pulkit', 'Yogesh', 'Shubham', 'Simran', 'Vivek', 'Chanchal', 'Swapnil']
 
 Cse1_names = A1_names + A2_names
 

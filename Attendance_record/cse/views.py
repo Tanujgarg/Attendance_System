@@ -1,9 +1,9 @@
-from django.shortcuts import render, HttpResponse, redirect, render_to_response
+from django.shortcuts import render, HttpResponse, redirect
 from .forms import *
 from .models import *
 from .Files.Form_data import *
-# Create your views here.
 import datetime
+from cse.Files.Library.Data.Database import *
 
 form_class = None
 subject = ''
@@ -275,6 +275,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
+                        request.session.flush()
                         return render(request, 'Error.html', {'error': True})
                     # print(i, status)
         if form_class == 'cse1a':
@@ -303,6 +304,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
+                        request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse1b':
             form = Cse1b(request.POST)
@@ -330,6 +332,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
+                        request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse1la':
             form = Cse1a(request.POST)
@@ -348,7 +351,8 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        return render(request, 'Error.html', {'error': True})
+                        request.session.flush()
+                        return render(request, 'Error.html', {'lab_error': True})
         if form_class == 'cse1lb':
             form = Cse1b(request.POST)
             print("Post")
@@ -366,10 +370,10 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
+                        request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
         request.session.flush()
         return render(request, 'Error.html', {'success': True})
-
 
 
 def student_register(request):
@@ -391,3 +395,129 @@ def student_register(request):
         print("Get")
         # return render(request, 'Signup.html')
     return render(request, 'Signup.html')
+
+
+def Change_password(request):
+    if request.method == "GET":
+        teacher = request.GET.get('name')
+        password = request.GET.get('pswrd')
+        print(teacher, password)
+        user = Teachers.objects.filter(name=teacher).first()
+        user.password = password
+
+        user.save()
+        print("saved")
+        print(user.password)
+    return HttpResponse("Password Changed")
+
+
+def dept(request):
+    if request.method == "GET":
+        if request.session.has_key('dept'):
+            request.session.flush()
+            wt = []
+            se = []
+            mc = []
+            cd = []
+            bie = []
+            eit = []
+            wt_lab = []
+            se_lab = []
+            eit_lab = []
+            wt_avg = []
+            se_avg = []
+            mc_avg = []
+            cd_avg = []
+            bie_avg = []
+            eit_avg = []
+            wt_lab_avg = []
+            se_lab_avg = []
+            eit_lab_avg = []
+            for i in Cse1_roll:
+                obj = DataByRollNo(i)
+                wt.append(obj.wt_present)
+                se.append(obj.se_present)
+                mc.append(obj.mc_present)
+                cd.append(obj.cd_present)
+                bie.append(obj.bie_present)
+                eit.append(obj.eit_present)
+                wt_lab.append(obj.wt_lab_present)
+                se_lab.append(obj.se_lab_present)
+                eit_lab.append(obj.eit_lab_present)
+                wt_avg.append(obj.wt_avg)
+                se_avg.append(obj.se_avg)
+                mc_avg.append(obj.mc_avg)
+                cd_avg.append(obj.cd_avg)
+                bie_avg.append(obj.bie_avg)
+                eit_avg.append(obj.eit_avg)
+                wt_lab_avg.append(obj.wt_lab_avg)
+                se_lab_avg.append(obj.se_lab_avg)
+                eit_lab_avg.append(obj.eit_lab_avg)
+                # print(wt)
+            data = list(
+                zip(Cse1_roll, wt, wt_avg, se, se_avg, mc, mc_avg, bie, bie_avg, eit, eit_avg, cd, cd_avg, wt_lab,
+                    wt_lab_avg,
+                    se_lab, se_lab_avg, eit_lab, eit_lab_avg))
+            return render(request, 'Students_attendance_data.html', {'data': data,
+                                                                     'wt_total': wt_total,
+                                                                     'wt_req': wt_req,
+                                                                     'wt_lab_total': wt_lab_total,
+                                                                     'wt_lab_req': wt_lab_req,
+                                                                     'se_total': se_total,
+                                                                     'se_req': se_req,
+                                                                     'se_lab_total': se_lab_total,
+                                                                     'se_lab_req': se_lab_req,
+                                                                     'eit_total': eit_total,
+                                                                     'eit_req': eit_req,
+                                                                     'eit_lab_total': eit_lab_total,
+                                                                     'eit_lab_req': eit_lab_req,
+                                                                     'cd_total': cd_total,
+                                                                     'cd_req': cd_req,
+                                                                     'mc_total': mc_total,
+                                                                     'mc_req': mc_req,
+                                                                     'bie_total': bie_total,
+                                                                     'bie_req': bie_req})
+        return render(request, 'Error.html', {'login_error': True})
+    else:
+        return HttpResponse("Bad Request")
+
+
+def dept_login(request):
+    if request.method == "POST":
+        form = Teachers_login(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            password = form.cleaned_data['password']
+            print(name,password)
+
+            user = Auth.objects.filter(name=name.lower()).first()
+            if user:
+                if user.password == password:
+                    request.session['dept'] = name
+                    return redirect('/dept')
+                else:
+                    return render(request, 'authlogin.html', {'error': 'Incorrect password'})
+            else:
+                return render(request, 'authlogin.html', {'error': 'User not found'})
+    elif request.method == "GET":
+        return render(request, 'authlogin.html', {})
+
+
+def feedback(request):
+    if request.method == "POST":
+        form = Feedback_Form(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            roll_no = form.cleaned_data['roll_no']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            print(message)
+            feed = Query(name=name, roll_no=roll_no, email=email, message=message)
+            try:
+                feed.save()
+            except:
+                return render(request, 'Error.html', {'error': True})
+            print('saved')
+            return render(request, 'Error.html', {'feed': True})
+    elif request.method == "GET":
+        return render(request, 'Feedback.html', {})

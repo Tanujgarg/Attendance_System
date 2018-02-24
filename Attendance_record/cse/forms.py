@@ -98,3 +98,10 @@ class Cse1(forms.Form):
     Student34 = forms.BooleanField(initial=False, required=False)
     Student35 = forms.BooleanField(initial=False, required=False)
     Student36 = forms.BooleanField(initial=False, required=False)
+
+
+class Feedback_Form(forms.Form):
+    name = forms.CharField(max_length=25)
+    roll_no = forms.CharField(max_length=20, required=False, initial=None)
+    email = forms.CharField(max_length=50)
+    message = forms.CharField(max_length=1000)

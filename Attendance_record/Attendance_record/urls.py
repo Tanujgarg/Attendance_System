@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cse.views import *
+# handler404 = 'cse.views.error'
+# handler500 = 'cse.views.error'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,8 @@ urlpatterns = [
     path('attendance/', mark_attendance),
     path('home', index),
     path('studentsignup', student_register),
+    # path('password', Change_password),
+    path('dept', dept),
+    path('feedback', feedback),
+    path('authlogin', dept_login)
 ]

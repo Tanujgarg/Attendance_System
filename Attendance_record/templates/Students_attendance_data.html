@@ -1,0 +1,137 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
+    <meta charset="UTF-8">
+    <title title="Attendance Record">Attendance Record | 3rd Year</title>
+    <style>
+        button{
+            background-color: #004445;
+            color: white;
+            width: 200px;
+            height: 60px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #2c7873;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+tr:first-child{
+    background-color: #2c7873;
+}
+        /*tr:nth-child(even){background-color: #004445;*/
+        /*}*/
+    </style>
+    <script src="{% static 'jquery.js' %}"></script>
+    <script src="{% static 'jspdf.js' %}"></script>
+    <script src="{% static 'pdfFromHTML.js' %}"></script>
+</head>
+
+<body style="background-color: #132226; color: white">
+<center><h1>CSE Department</h1></center>
+<center><h2>Student attendance record</h2></center>
+
+<div style="overflow-x:auto;">
+<table>
+    <tr>
+        <th>Subjects:</th>
+        <th>WT</th>
+        <th>SE</th>
+        <th>MC</th>
+        <th>BIE</th>
+        <th>EIT</th>
+        <th>CD</th>
+        <th>WT_LAB</th>
+        <th>SE_LAB</th>
+        <th>EIT_LAB</th>
+    </tr>
+    <tr>
+        <th>Total:</th>
+        <td>{{ wt_total }}</td>
+        <td>{{ se_total }}</td>
+        <td>{{ mc_total }}</td>
+        <td>{{ bie_total }}</td>
+        <td>{{ eit_total }}</td>
+        <td>{{ cd_total }}</td>
+        <td>{{ wt_lab_total }}</td>
+        <td>{{ se_lab_total }}</td>
+        <td>{{ eit_lab_total }}</td>
+    </tr>
+    <tr>
+        <th>Required:</th>
+        <td>{{ wt_req }}</td>
+        <td>{{ se_req }}</td>
+        <td>{{ mc_req }}</td>
+        <td>{{ bie_req }}</td>
+        <td>{{ eit_req }}</td>
+        <td>{{ cd_req }}</td>
+        <td>{{ wt_lab_req }}</td>
+        <td>{{ se_lab_req }}</td>
+        <td>{{ eit_lab_req }}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <th>Students:</th>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    {% for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s in data %}
+        {% with 'red' as color %}
+        <tr>
+        <th>{{ a }}</th>
+        <td>{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
+        <td>{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
+        <td>{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
+        <td>{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
+        <td>{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
+        <td>{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
+        <td>{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
+        <td>{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
+        <td>{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
+    </tr>
+        {% endwith %}
+
+    {% endfor %}
+
+</table>
+</div>
+<br />
+<br />
+{#<center><button id="button">Download as PDF</button></center>#}
+</body>
+<script>
+    $('#button').click(function () {
+        HTMLtoPDF();
+
+    })
+</script>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Feedback Form</title>
+
+
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+
+<style type="text/css">
+  body{
+  width:100%;
+  height:100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #F4B21A;
+
+}
+
+
+h1,h2,h3 {
+  margin:10 0 35px 0;
+  font-family: "Times New Roman", Times, serif;
+
+  letter-spacing:1px;
+}
+
+p{
+  margin:0 0 25px;
+  font-size:18px;
+  line-height:1.6em;
+}
+a{
+  color:#26a5d3;
+}
+a:hover,a:focus{
+  text-decoration:none;
+  color:#26a5d3;
+}
+
+#contact{
+
+  color:black;
+  padding-bottom:80px;
+}
+
+textarea.form-control{
+    height:100px;
+}
+h2 {
+    font-size: 55px !important;
+}
+.button{
+        background-color: #2F2F2E;
+        color: white;
+        width: 180px;
+        height: 56px;
+        border-radius: 15px;
+        font-size: 16px;
+        }
+
+.form-control {
+    width: 58% !important;
+  }
+
+</style>
+  </head>
+  <body>
+
+<section id="contact" class="content-section text-center">
+        <div class="contact-section">
+            <div class="container">
+              <h2><b><i>Feedback</i></b></h2>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+
+                  <form method="post" id="" name="" class="form-horizontal">
+                      {% csrf_token %}
+                  <center>
+                      <div class="form-group">
+                        <h4><b>Name :</b></h4>
+                        <input type="text" class="form-control" id="" placeholder="Your name..." name="name" required>
+                      </div>
+                      <div class="form-group">
+                      <h4><b>Roll Number :</b></h4>
+                        <input type="text" class="form-control" id="" placeholder="Optional.." name="roll_no">
+                      </div>
+                      <div class="form-group">
+                        <h4><b>Email :</b></h4>
+                        <input type="e-mail" class="form-control" id="" placeholder="Your E-mail..." name="email" required>
+                      </div>
+                      <div class="form-group ">
+                        <h4><b>Your feedback:</b></h4>
+                       <textarea class="form-control" placeholder="Write your Query" name="message" required></textarea>
+                      </div>
+                      <hr>
+                      <button type="submit" class="btn btn-default button">Submit</button>
+                      </center>
+                  </form>
+
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+
+  </body>
+</html>
