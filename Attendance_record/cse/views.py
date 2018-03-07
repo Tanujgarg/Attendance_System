@@ -10,6 +10,8 @@ subject = ''
 is_lab = False
 
 
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -138,6 +140,8 @@ def student_login(request):
                     except ZeroDivisionError:
                         eit_lab_avg = 'N.A.'
 
+                    date = datetime.datetime.now().replace(microsecond=0)
+
                     return render(request, 'Dashboard.html', {'wt': wt,
                                                               'user': user,
                                                               'cd': cd,
@@ -174,7 +178,8 @@ def student_login(request):
                                                               'se_lab_avg': se_lab_avg,
                                                               'eit_lab_total': eit_lab_total,
                                                               'eit_lab_present': eit_lab_present,
-                                                              'eit_lab_avg': eit_lab_avg})
+                                                              'eit_lab_avg': eit_lab_avg,
+                                                              'date': date})
                 else:
                     return render(request, 'studentlogin.html', {'form': form,
                                                                  'error': 'Wrong password'})
@@ -204,8 +209,8 @@ def mark_attendance(request):
                                                                 'data': Cse1_data,
                                                                 'teacher': request.session['name'].upper(),
                                                                 'subject': subject.upper(),
-                                                                'date': datetime.datetime.now().date()})
-            if section == 'cse1a':
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse1a':
 
                 form_class = 'cse1a'
                 form = Cse1a(request.POST)
@@ -213,7 +218,7 @@ def mark_attendance(request):
                                                                 'data': A1_data,
                                                                 'teacher': request.session['name'].upper(),
                                                                 'subject': subject.upper(),
-                                                                'date': datetime.datetime.now().date()})
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
             elif section == 'cse1b':
 
                 form_class = 'cse1b'
@@ -222,7 +227,7 @@ def mark_attendance(request):
                                                                 'data': A2_data,
                                                                 'teacher': request.session['name'].upper(),
                                                                 'subject': subject.upper(),
-                                                                'date': datetime.datetime.now().date()})
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
             elif section == 'cse1la':
                 is_lab = True
                 form_class = 'cse1la'
@@ -231,7 +236,7 @@ def mark_attendance(request):
                                                                 'data': A1_data,
                                                                 'teacher': request.session['name'].upper(),
                                                                 'subject': subject.upper(),
-                                                                'date': datetime.datetime.now().date()})
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
             elif section == 'cse1lb':
                 is_lab = True
                 form_class = 'cse1lb'
@@ -240,7 +245,52 @@ def mark_attendance(request):
                                                                 'data': A2_data,
                                                                 'teacher': request.session['name'].upper(),
                                                                 'subject': subject.upper(),
-                                                                'date': datetime.datetime.now().date()})
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse2':
+
+                form_class = 'cse2'
+                form = Cse1(request.POST)
+                return render(request, 'Mark_attendance.html', {'form': form,
+                                                                'data': Cse2_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse2a':
+
+                form_class = 'cse2a'
+                form = Cse1b(request.POST)
+                return render(request, 'Mark_attendance.html', {'form': form,
+                                                                'data': A3_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse2b':
+
+                form_class = 'cse2b'
+                form = Cse1b(request.POST)
+                return render(request, 'Mark_attendance.html', {'form': form,
+                                                                'data': A4_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse2la':
+                is_lab = True
+                form_class = 'cse2la'
+                form = Cse1b(request.POST)
+                return render(request, 'Mark_attendance.html', {'form': form,
+                                                                'data': A3_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
+            elif section == 'cse2lb':
+                is_lab = True
+                form_class = 'cse2lb'
+                form = Cse1b(request.POST)
+                return render(request, 'Mark_attendance.html', {'form': form,
+                                                                'data': A4_data,
+                                                                'teacher': request.session['name'].upper(),
+                                                                'subject': subject.upper(),
+                                                                'date': datetime.datetime.now().replace(microsecond=0)})
 
             else:
                 return redirect("/home")
@@ -372,6 +422,137 @@ def mark_attendance(request):
                     else:
                         request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
+        if form_class == 'cse2':
+            form = Cse1(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                print(form_class)
+                for i, j in zip(Cse2_roll, Cse1_key):
+                    status = form.cleaned_data[j]
+                    print(i, status)
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                        print("mc saved")
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        request.session.flush()
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse2a':
+            form = Cse1b(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                print(form_class)
+                for i, j in zip(A3_roll, A_key):
+                    status = form.cleaned_data[j]
+                    print(i, status)
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                        print("mc saved")
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        request.session.flush()
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse2b':
+            form = Cse1b(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                print(form_class)
+                for i, j in zip(A4_roll, A_key):
+                    status = form.cleaned_data[j]
+                    print(i, status)
+                    if subject == 'wt' and not is_lab:
+                        attendance = WT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and not is_lab:
+                        attendance = EIT(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'bie':
+                        attendance = BIE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and not is_lab:
+                        attendance = SE(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'mc':
+                        attendance = MC(roll_no=i, status=status)
+                        attendance.save()
+                        print("mc saved")
+                    elif subject == 'cd':
+                        attendance = CD(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        request.session.flush()
+                        return render(request, 'Error.html', {'error': True})
+        if form_class == 'cse2la':
+            form = Cse1a(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A3_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and is_lab:
+                        attendance = WTLab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and is_lab:
+                        attendance = SELab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and is_lab:
+                        attendance = EITLab(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        request.session.flush()
+                        return render(request, 'Error.html', {'lab_error': True})
+        if form_class == 'cse2lb':
+            form = Cse1b(request.POST)
+            print("Post")
+            if form.is_valid():
+                print("form valid")
+                for i, j in zip(A4_roll, A_key):
+                    status = form.cleaned_data[j]
+                    if subject == 'wt' and is_lab:
+                        attendance = WTLab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'se' and is_lab:
+                        attendance = SELab(roll_no=i, status=status)
+                        attendance.save()
+                    elif subject == 'eit' and is_lab:
+                        attendance = EITLab(roll_no=i, status=status)
+                        attendance.save()
+                    else:
+                        request.session.flush()
+                        return render(request, 'Error.html', {'lab_error': True})
         request.session.flush()
         return render(request, 'Error.html', {'success': True})
 
@@ -387,100 +568,58 @@ def student_register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             print(name, password, email, roll_no)
-            student = Student(name=name, roll_no=roll_no, email=email, password=password)
-            student.save()
-            print("saved")
-            return render(request, 'Error.html', {'signup': True})
+            student = Student.objects.filter(roll_no=roll_no).first()
+            if student:
+                return HttpResponse("This user already exist")
+            else:
+                student = Student(name=name, roll_no=roll_no, email=email, password=password)
+                student.save()
+                print("saved")
+                return render(request, 'Error.html', {'signup': True})
     elif request.method == "GET":
         print("Get")
         # return render(request, 'Signup.html')
     return render(request, 'Signup.html')
 
 
-def Change_password(request):
+# def Change_password(request):
+#     if request.method == "POST":
+#         print("POST")
+#         form = Change_password(request.POST or None)
+#         if form.is_valid():
+#             name = form.cleaned_data['name']
+#             old = form.cleaned_data['old']
+#             new = form.cleaned_data['new']
+#             print(name, old, new)
+#             return HttpResponse("worked")
+#         else:
+#             print("Invalid")
+#
+#     elif request.method == "GET":
+#         print("Get password")
+#     return render(request, 'password_change.html', {})
+
+def test(request):
+    print("Test worked")
     if request.method == "GET":
-        teacher = request.GET.get('name')
-        password = request.GET.get('pswrd')
-        print(teacher, password)
-        user = Teachers.objects.filter(name=teacher).first()
-        user.password = password
-
-        user.save()
-        print("saved")
-        print(user.password)
-    return HttpResponse("Password Changed")
-
-
-def dept(request):
-    if request.method == "GET":
-        if request.session.has_key('dept'):
-            request.session.flush()
-            wt = []
-            se = []
-            mc = []
-            cd = []
-            bie = []
-            eit = []
-            wt_lab = []
-            se_lab = []
-            eit_lab = []
-            wt_avg = []
-            se_avg = []
-            mc_avg = []
-            cd_avg = []
-            bie_avg = []
-            eit_avg = []
-            wt_lab_avg = []
-            se_lab_avg = []
-            eit_lab_avg = []
-            for i in Cse1_roll:
-                obj = DataByRollNo(i)
-                wt.append(obj.wt_present)
-                se.append(obj.se_present)
-                mc.append(obj.mc_present)
-                cd.append(obj.cd_present)
-                bie.append(obj.bie_present)
-                eit.append(obj.eit_present)
-                wt_lab.append(obj.wt_lab_present)
-                se_lab.append(obj.se_lab_present)
-                eit_lab.append(obj.eit_lab_present)
-                wt_avg.append(obj.wt_avg)
-                se_avg.append(obj.se_avg)
-                mc_avg.append(obj.mc_avg)
-                cd_avg.append(obj.cd_avg)
-                bie_avg.append(obj.bie_avg)
-                eit_avg.append(obj.eit_avg)
-                wt_lab_avg.append(obj.wt_lab_avg)
-                se_lab_avg.append(obj.se_lab_avg)
-                eit_lab_avg.append(obj.eit_lab_avg)
-                # print(wt)
-            data = list(
-                zip(Cse1_roll, wt, wt_avg, se, se_avg, mc, mc_avg, bie, bie_avg, eit, eit_avg, cd, cd_avg, wt_lab,
-                    wt_lab_avg,
-                    se_lab, se_lab_avg, eit_lab, eit_lab_avg))
-            return render(request, 'Students_attendance_data.html', {'data': data,
-                                                                     'wt_total': wt_total,
-                                                                     'wt_req': wt_req,
-                                                                     'wt_lab_total': wt_lab_total,
-                                                                     'wt_lab_req': wt_lab_req,
-                                                                     'se_total': se_total,
-                                                                     'se_req': se_req,
-                                                                     'se_lab_total': se_lab_total,
-                                                                     'se_lab_req': se_lab_req,
-                                                                     'eit_total': eit_total,
-                                                                     'eit_req': eit_req,
-                                                                     'eit_lab_total': eit_lab_total,
-                                                                     'eit_lab_req': eit_lab_req,
-                                                                     'cd_total': cd_total,
-                                                                     'cd_req': cd_req,
-                                                                     'mc_total': mc_total,
-                                                                     'mc_req': mc_req,
-                                                                     'bie_total': bie_total,
-                                                                     'bie_req': bie_req})
-        return render(request, 'Error.html', {'login_error': True})
-    else:
-        return HttpResponse("Bad Request")
-
+        print("Method is Get")
+        name = request.GET.get("name")
+        old = request.GET.get("old")
+        new = request.GET.get("new")
+        teacher = Teachers.objects.filter(name=name).first()
+        if teacher:
+            if teacher.password == old:
+                if new:
+                    teacher.password = new
+                    teacher.save()
+                    print(name, old, new)
+                    return HttpResponse("Password Changed")
+                else:
+                    return HttpResponse("please enter valid new password")
+            else:
+                return HttpResponse("Old password incorrect")
+        else:
+            return HttpResponse("no user found with name : ", name)
 
 def dept_login(request):
     if request.method == "POST":
@@ -488,7 +627,7 @@ def dept_login(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             password = form.cleaned_data['password']
-            print(name,password)
+            print(name, password)
 
             user = Auth.objects.filter(name=name.lower()).first()
             if user:
@@ -521,3 +660,70 @@ def feedback(request):
             return render(request, 'Error.html', {'feed': True})
     elif request.method == "GET":
         return render(request, 'Feedback.html', {})
+
+
+def error(request):
+    return redirect('/')
+
+
+def pas_chng(request):
+    if request.method == "POST":
+        form = Change_password(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            old = form.cleaned_data['old']
+            new = form.cleaned_data['new']
+            teacher = Teachers.objects.filter(name=name).first()
+            if teacher:
+                if teacher.password == old:
+                    if new:
+                        teacher.password = new
+                        teacher.save()
+                        print(name, old, new)
+                        return HttpResponse("Password Changed")
+                    else:
+                        return HttpResponse("please enter valid new password")
+                else:
+                    return HttpResponse("Old password incorrect")
+            else:
+                return HttpResponse("No user found")
+    elif request.method == "GET":
+        return render(request, 'password_change.html', {})
+
+
+def dept(request):
+    print("dept")
+    if request.method == "GET":
+        print("get")
+        if request.session.has_key('dept'):
+            request.session.flush()
+            auth_date = datetime.datetime.now().replace(microsecond=0)
+            a1_lecture_data = present_and_avg(A1_roll)
+            a2_lecture_data = present_and_avg(A2_roll)
+            a1_req = req_lectures(6315010)
+            a2_req = req_lectures(6315037)
+            a1_total = total_lectures(6315010)
+            a2_total = total_lectures(6315037)
+            a3_lecture_data = present_and_avg(A3_roll)
+            a4_lecture_data = present_and_avg(A4_roll)
+            a3_req = req_lectures(6315008)
+            a4_req = req_lectures(6315659)
+            a3_total = total_lectures(6315008)
+            a4_total = total_lectures(6315659)
+            return render(request, 'Students_attendance_data.html', {'a1_total': a1_total,
+                                                                     'a2_total': a2_total,
+                                                                     'a1_req': a1_req,
+                                                                     'a2_req': a2_req,
+                                                                     'a1_data': a1_lecture_data,
+                                                                     'a2_data': a2_lecture_data,
+                                                                     'date': auth_date,
+                                                                     'a3_total': a3_total,
+                                                                     'a4_total': a4_total,
+                                                                     'a3_req': a3_req,
+                                                                     'a4_req': a4_req,
+                                                                     'a3_data': a3_lecture_data,
+                                                                     'a4_data': a4_lecture_data})
+        else:
+            return render(request, 'Error.html', {'login_error': True})
+    else:
+        return HttpResponse("Bad Request")

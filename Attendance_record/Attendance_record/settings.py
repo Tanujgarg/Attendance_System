@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cse.apps.CseConfig',
-    'livesync',
+    #'livesync',
 ]
 
 MIDDLEWARE = [

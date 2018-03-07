@@ -20,7 +20,7 @@ from cse.views import *
 # handler500 = 'cse.views.error'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('i_am_admin/', admin.site.urls),
     path('teacherlogin', teachers_login),
     path('studentlogin', student_login),
     path('', index),
@@ -30,5 +30,7 @@ urlpatterns = [
     # path('password', Change_password),
     path('dept', dept),
     path('feedback', feedback),
-    path('authlogin', dept_login)
+    path('authlogin', dept_login),
+    # path('pass', test),
+    path('change', pas_chng)
 ]

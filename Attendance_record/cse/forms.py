@@ -105,3 +105,9 @@ class Feedback_Form(forms.Form):
     roll_no = forms.CharField(max_length=20, required=False, initial=None)
     email = forms.CharField(max_length=50)
     message = forms.CharField(max_length=1000)
+
+
+class Change_password(forms.Form):
+    name = forms.CharField(max_length=25)
+    old = forms.CharField(max_length=25)
+    new = forms.CharField(max_length=25)

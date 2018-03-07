@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,7 @@
 <center><h2>Date : {{ date }}</h2></center>
 <br>
 <div style="overflow-x:auto;">
-    <form method="post">
+    <form method="post" onsubmit="return hello(this);">
         {% csrf_token %}
         <table>
             <tr>
@@ -55,7 +56,7 @@
                     <tr>
                     <td>{{ i }}</td>
                     <td>{{ j }}</td>
-                    <td><input title="" id='checkbox' type="checkbox" name="{{ k }}"></td>
+                    <td><input title="" id='checkbox' type="checkbox" name="{{ k }}" checked></td>
                     </tr>
                 {% endfor %}
             {% endif %}
@@ -64,6 +65,14 @@
         <center><input class="button" type="submit" name=""></center>
     </form>
 </div>
+<script src="{% static 'jquery.js' %}"></script>
+<script>
+    var no = $('input[type=checkbox]');
+    function hello () {
+        var present = no.filter(':checked').length
+        return confirm(present + ' Students are present, Are you Confirm?');
 
+    }
+</script>
 </body>
 </html>
