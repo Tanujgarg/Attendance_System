@@ -111,3 +111,7 @@ class Change_password(forms.Form):
     name = forms.CharField(max_length=25)
     old = forms.CharField(max_length=25)
     new = forms.CharField(max_length=25)
+
+class modify(forms.Form):
+    roll_no = forms.CharField(max_length=10)
+    is_lab = forms.BooleanField(required=False, initial=False)

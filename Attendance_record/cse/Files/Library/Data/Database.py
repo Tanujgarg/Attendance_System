@@ -100,9 +100,6 @@ class DataByRollNo:
             self.eit_lab_avg = 'N.A.'
 
 
-
-
-
 def total_lectures(roll_no):
     wt_total = []
     se_total = []
@@ -125,8 +122,6 @@ def total_lectures(roll_no):
     eit_lab_total.append(a1.eit_lab_total)
     return list(zip(wt_total, se_total, mc_total, bie_total, eit_total,
                     cd_total, wt_lab_total, se_lab_total, eit_lab_total))
-
-
 
 
 def req_lectures(roll_no):
@@ -161,8 +156,6 @@ def req_lectures(roll_no):
 
     return list(zip(wt_req1, se_req1, mc_req1, bie_req1, eit_req1, cd_req1,
                     wt_lab_req1, se_lab_req1, eit_lab_req1))
-
-
 
 
 def present_and_avg(data):

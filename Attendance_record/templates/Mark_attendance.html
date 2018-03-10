@@ -7,6 +7,13 @@
     <title title="Select Section">Select Section</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
+        header h4 {
+            margin: auto;
+            padding-top: 1%;
+            padding-right: 1%;
+            text-decoration: underline;
+            font-weight: bold;
+        }
         .button{
             background-color: #004445;
             color: white;
@@ -33,10 +40,18 @@
             height: 20px;
         }
 
-        tr:nth-child(even){background-color: #004445}
+        tr:nth-child(even){background-color: #e5e5e5
+        }
+        tr:nth-child(odd){background-color: #b7b7b7
+        }
     </style>
 </head>
-<body style="background-color:#021C1E; color: white;" oncontextmenu="return false;">
+<body style="background-color:white; color: black;" oncontextmenu="return false;">
+<header>
+    <h4 align="right">Made by : Tanuj Garg & Sabha</h4>
+</header>
+<a href="/logout"><button style="background-color: black; color: white;
+width: 100px; height: 50px; border-radius: 6px;">Logout</button></a>
 <center><h1>Mark Attendance</h1></center>
 <center><h2>Subject : {{ subject }}</h2></center>
 <center><h2>Teacher : {{ teacher }} </h2></center>

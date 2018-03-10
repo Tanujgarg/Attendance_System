@@ -9,11 +9,17 @@
     <meta content="" name="description">
     <link rel="icon" type="image/png" sizes="56x56" href="{% static 'favicon.png' %}">
 
-    <link href={% static 'bootstrap.min.css' %} rel="stylesheet">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
     <style>
-
+        header h4 {
+            margin: auto;
+            padding-top: 1%;
+            padding-right: 1%;
+            text-decoration: underline;
+            font-weight: bold;
+        }
         body {
-            background: #021C1E;
+            background: white;
             color: #444;
             font-family: "Open Sans", sans-serif;
         }
@@ -45,7 +51,7 @@
         #intro {
             width: 100%;
             height: 60vh;
-            background: #021C1E;
+            background: white;
             position: relative;
         }
 
@@ -65,7 +71,7 @@
         }
 
         #intro .intro-content h2 {
-            color: #0c2e8a;
+            color: #224ad8;
             margin-bottom: 30px;
             font-size: 64px;
             font-weight: 700;
@@ -73,7 +79,7 @@
         }
 
         #intro .intro-content h2 span {
-            color: #50d8af;
+            color: #224ad8;
             text-decoration: underline;
         }
 
@@ -121,7 +127,10 @@
     </style>
 </head>
 
-<body style="background-color:#021C1E;" id ="body" oncontextmenu="return false;">
+<body style="background-color:white;" id ="body" oncontextmenu="return false;">
+<header>
+    <h4 align="right">Made by : Tanuj Garg & Sabha</h4>
+</header>
 
 <section id="intro" class="wow fadeIn">
 
@@ -135,8 +144,8 @@
         </div>
         <div>
             <br/>
-            <h3 style="color: #50d8af;">Any Query?</h3>
-            <h3><a href="/feedback">Please click here..</a></h3>
+            <h3 style="color: #d80607;">Any Query?</h3>
+            <h3><a href="/feedback" style="color: blue;">Please click here....</a></h3>
         </div>
     </div>
 

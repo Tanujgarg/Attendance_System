@@ -7,8 +7,15 @@
     <title title="Student Dashboard">Student Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        header h4 {
+            margin: auto;
+            padding-top: 1%;
+            padding-right: 1%;
+            text-decoration: underline;
+            font-weight: bolder;
+        }
         .button,.button1{
-            background-color: #004445;
+            background-color: black;
             color: white;
             width: 200px;
             height: 60px;
@@ -19,7 +26,7 @@
             border-collapse: collapse;
             border-spacing: 0;
             width: 100%;
-            border: 1px solid #2c7873;
+            border: 1px solid black;
         }
 
         th, td {
@@ -27,17 +34,20 @@
             padding: 8px;
         }
 
-        tr:nth-child(even){background-color: #004445;
+        tr:nth-child(even){background-color: #bdbdbd;
+        }
+        tr:nth-child(odd){background-color: #989898;
         }
         .hidden{
             display: none;
         }
     </style>
 </head>
-<body style="background-color:#021C1E; color: white;" oncontextmenu="return false;">
+<body style="background-color:white; color: black;" oncontextmenu="return false;">
 <header>
-    <!--<h2 style="float: right;"><a href="#">Logout</a></h2>-->
+    <h4 align="right">Made by : Tanuj Garg & Sabha</h4>
 </header>
+<center><h1>CSE Department</h1></center>
 <center><h1>Student Dashboard</h1></center>
 <center><h3>{{ date }}</h3></center>
 <h2>{{ user.name|upper }}</h2>

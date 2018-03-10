@@ -10,8 +10,6 @@ subject = ''
 is_lab = False
 
 
-
-
 def index(request):
     return render(request, 'index.html')
 
@@ -24,7 +22,7 @@ def teachers_login(request):
             print("Form valid")
             name = form.cleaned_data['name']
             password = form.cleaned_data['password']
-            print(name, password)
+            print("Teacher logged in", name)
             user = Teachers.objects.filter(name=name.lower()).first()
             if user:
                 if password == user.password:
@@ -304,7 +302,7 @@ def mark_attendance(request):
                 print(form_class)
                 for i, j in zip(Cse1_roll, Cse1_key):
                     status = form.cleaned_data[j]
-                    print(i, status)
+                    #print(i, status)
                     if subject == 'wt' and not is_lab:
                         attendance = WT(roll_no=i, status=status)
                         attendance.save()
@@ -324,8 +322,9 @@ def mark_attendance(request):
                     elif subject == 'cd':
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
+                        print("Attendance makerd")
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
                     # print(i, status)
         if form_class == 'cse1a':
@@ -354,7 +353,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse1b':
             form = Cse1b(request.POST)
@@ -382,7 +381,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse1la':
             form = Cse1a(request.POST)
@@ -401,7 +400,7 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
         if form_class == 'cse1lb':
             form = Cse1b(request.POST)
@@ -420,7 +419,7 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
         if form_class == 'cse2':
             form = Cse1(request.POST)
@@ -430,7 +429,7 @@ def mark_attendance(request):
                 print(form_class)
                 for i, j in zip(Cse2_roll, Cse1_key):
                     status = form.cleaned_data[j]
-                    print(i, status)
+                    # print(i, status)
                     if subject == 'wt' and not is_lab:
                         attendance = WT(roll_no=i, status=status)
                         attendance.save()
@@ -451,7 +450,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse2a':
             form = Cse1b(request.POST)
@@ -461,7 +460,7 @@ def mark_attendance(request):
                 print(form_class)
                 for i, j in zip(A3_roll, A_key):
                     status = form.cleaned_data[j]
-                    print(i, status)
+                    # print(i, status)
                     if subject == 'wt' and not is_lab:
                         attendance = WT(roll_no=i, status=status)
                         attendance.save()
@@ -482,7 +481,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse2b':
             form = Cse1b(request.POST)
@@ -492,7 +491,7 @@ def mark_attendance(request):
                 print(form_class)
                 for i, j in zip(A4_roll, A_key):
                     status = form.cleaned_data[j]
-                    print(i, status)
+                    # print(i, status)
                     if subject == 'wt' and not is_lab:
                         attendance = WT(roll_no=i, status=status)
                         attendance.save()
@@ -513,7 +512,7 @@ def mark_attendance(request):
                         attendance = CD(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'error': True})
         if form_class == 'cse2la':
             form = Cse1a(request.POST)
@@ -532,7 +531,7 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
         if form_class == 'cse2lb':
             form = Cse1b(request.POST)
@@ -551,9 +550,9 @@ def mark_attendance(request):
                         attendance = EITLab(roll_no=i, status=status)
                         attendance.save()
                     else:
-                        request.session.flush()
+                        # request.session.flush()
                         return render(request, 'Error.html', {'lab_error': True})
-        request.session.flush()
+        # request.session.flush()
         return render(request, 'Error.html', {'success': True})
 
 
@@ -599,14 +598,14 @@ def student_register(request):
 #         print("Get password")
 #     return render(request, 'password_change.html', {})
 
-def test(request):
+def auth_change(request):
     print("Test worked")
     if request.method == "GET":
         print("Method is Get")
         name = request.GET.get("name")
         old = request.GET.get("old")
         new = request.GET.get("new")
-        teacher = Teachers.objects.filter(name=name).first()
+        teacher = Auth.objects.filter(name=name.lower()).first()
         if teacher:
             if teacher.password == old:
                 if new:
@@ -673,13 +672,13 @@ def pas_chng(request):
             name = form.cleaned_data['name']
             old = form.cleaned_data['old']
             new = form.cleaned_data['new']
-            teacher = Teachers.objects.filter(name=name).first()
+            teacher = Teachers.objects.filter(name=name.lower()).first()
             if teacher:
                 if teacher.password == old:
                     if new:
                         teacher.password = new
                         teacher.save()
-                        print(name, old, new)
+                        # print(name, old, new)
                         return HttpResponse("Password Changed")
                     else:
                         return HttpResponse("please enter valid new password")
@@ -727,3 +726,207 @@ def dept(request):
             return render(request, 'Error.html', {'login_error': True})
     else:
         return HttpResponse("Bad Request")
+
+
+def modify_attendance(request):
+    if request.session.has_key('name'):
+        if request.method == "POST":
+            form = modify(request.POST)
+            if form.is_valid():
+                roll_no = form.cleaned_data['roll_no']
+                is_l = form.cleaned_data['is_lab']
+                if subject == 'wt' and not is_l:
+                    user = WT.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'se' and not is_l:
+                    user = SE.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+
+                if subject == 'eit' and not is_l:
+                    user = EIT.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'mc' and not is_l:
+                    user = MC.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'cd' and not is_l:
+                    user = CD.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'bie' and not is_l:
+                    user = BIE.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'wt' and is_l:
+                    user = WTLab.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'se' and is_l:
+                    user = SELab.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                if subject == 'eit' and is_l:
+                    user = EITLab.objects.filter(roll_no=roll_no).filter(date=datetime.datetime.now().date()).last()
+                    if user:
+                        if not user.status:
+                            user.status = True
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Present',
+                                                                              'subject': subject})
+                        else:
+                            user.status = False
+                            user.save()
+                            return render(request, 'modify_attendance.html', {'success': True,
+                                                                              'student': roll_no,
+                                                                              'status': 'Absent',
+                                                                              'subject': subject})
+                    else:
+                        return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
+                                            ' or no attendance marked today</b></h1></center>')
+                else:
+                    request.session.flush()
+                    return HttpResponse('<center><h1><b>oops!, Wrong Entry or This '
+                                        'subject has no lab. please try again later</b></h1></center>')
+
+        elif request.method == "GET":
+            return render(request, 'modify_attendance.html', {})
+    else:
+        return render(request, 'Error.html', {'login_error': True})
+
+
+def logout(request):
+    request.session.flush()
+    return redirect("/")

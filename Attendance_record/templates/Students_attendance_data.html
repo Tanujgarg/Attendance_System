@@ -7,6 +7,13 @@
     <meta charset="UTF-8">
     <title title="Attendance Record">Attendance Record | 3rd Year</title>
     <style>
+         header h4 {
+            margin: auto;
+            padding-top: 1%;
+            padding-right: 1%;
+            text-decoration: underline;
+            font-weight: bold;
+        }
         button{
             background-color: #004445;
             color: white;
@@ -19,7 +26,7 @@
             border-collapse: collapse;
             border-spacing: 0;
             width: 100%;
-            border: 1px solid #2c7873;
+            border: 1px solid black;
         }
 
         th, td {
@@ -27,7 +34,7 @@
             padding: 8px;
         }
 tr:first-child{
-    background-color: #2c7873;
+    background-color: #b2b2b2;
 }
         /*tr:nth-child(odd){background-color: #004445;*/
         /*}
@@ -37,7 +44,10 @@ tr:first-child{
     <script src="{% static 'pdfFromHTML.js' %}"></script>
 </head>
 
-<body style="background-color: #132226; color: white">
+<body style="background-color: white; color: black;">
+<header>
+    <h4 align="right">Made by : Tanuj Garg & Sabha</h4>
+</header>
 <center><h1>CSE Department</h1></center>
 <center><h2>Student attendance record</h2></center>
 <h2>{{ date }}</h2>
@@ -120,7 +130,7 @@ tr:first-child{
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% elif c >= 75%}
-          {% with 'white' as color %}
+          {% with 'black' as color %}
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% endif %}
@@ -129,7 +139,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% elif e >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% endif %}
@@ -138,7 +148,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% elif g >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% endif %}
@@ -147,7 +157,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% elif i >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% endif %}
@@ -156,7 +166,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% elif k >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% endif %}
@@ -165,7 +175,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% elif m >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% endif %}
@@ -174,7 +184,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% elif o >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% endif %}
@@ -183,7 +193,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% elif q >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% endif %}
@@ -192,7 +202,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% elif s >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% endif %}
@@ -283,7 +293,7 @@ tr:first-child{
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% elif c >= 75%}
-          {% with 'white' as color %}
+          {% with 'black' as color %}
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% endif %}
@@ -292,7 +302,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% elif e >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% endif %}
@@ -301,7 +311,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% elif g >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% endif %}
@@ -310,7 +320,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% elif i >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% endif %}
@@ -319,7 +329,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% elif k >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% endif %}
@@ -328,7 +338,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% elif m >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% endif %}
@@ -337,7 +347,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% elif o >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% endif %}
@@ -346,7 +356,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% elif q >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% endif %}
@@ -355,7 +365,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% elif s >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% endif %}
@@ -448,7 +458,7 @@ tr:first-child{
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% elif c >= 75%}
-          {% with 'white' as color %}
+          {% with 'black' as color %}
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% endif %}
@@ -457,7 +467,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% elif e >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% endif %}
@@ -466,7 +476,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% elif g >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% endif %}
@@ -475,7 +485,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% elif i >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% endif %}
@@ -484,7 +494,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% elif k >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% endif %}
@@ -493,7 +503,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% elif m >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% endif %}
@@ -502,7 +512,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% elif o >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% endif %}
@@ -511,7 +521,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% elif q >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% endif %}
@@ -520,7 +530,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% elif s >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% endif %}
@@ -612,7 +622,7 @@ tr:first-child{
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% elif c >= 75%}
-          {% with 'white' as color %}
+          {% with 'black' as color %}
                 <td style="color: {{ color }}">{{ b }}&nbsp;,&nbsp;&nbsp;({{ c }}%)</td>
             {% endwith %}
         {% endif %}
@@ -621,7 +631,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% elif e >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ d }}&nbsp;,&nbsp;&nbsp;({{ e }}%)</td>
             {% endwith %}
         {% endif %}
@@ -630,7 +640,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% elif g >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ f }}&nbsp;,&nbsp;&nbsp;({{ g }}%)</td>
             {% endwith %}
         {% endif %}
@@ -639,7 +649,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% elif i >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ h }}&nbsp;,&nbsp;&nbsp;({{ i }}%)</td>
             {% endwith %}
         {% endif %}
@@ -648,7 +658,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% elif k >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ j }}&nbsp;,&nbsp;&nbsp;({{ k }}%)</td>
             {% endwith %}
         {% endif %}
@@ -657,7 +667,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% elif m >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ l }}&nbsp;,&nbsp;&nbsp;({{ m }}%)</td>
             {% endwith %}
         {% endif %}
@@ -666,7 +676,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% elif o >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ n }}&nbsp;,&nbsp;&nbsp;({{ o }}%)</td>
             {% endwith %}
         {% endif %}
@@ -675,7 +685,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% elif q >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ p }}&nbsp;,&nbsp;&nbsp;({{ q }}%)</td>
             {% endwith %}
         {% endif %}
@@ -684,7 +694,7 @@ tr:first-child{
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% elif s >= 75 %}
-            {% with 'white' as color %}
+            {% with 'black' as color %}
             <td style="color: {{ color }}">{{ r }}&nbsp;,&nbsp;&nbsp;({{ s }}%)</td>
             {% endwith %}
         {% endif %}
