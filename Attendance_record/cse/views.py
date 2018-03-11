@@ -17,6 +17,8 @@ def index(request):
 def teachers_login(request):
     global subject
     if request.method == 'POST':
+        request.session.set_expiry(1200)
+        print(request.session.get_expiry_age())
         form = Teachers_login(request.POST)
         if form.is_valid():
             print("Form valid")
@@ -29,7 +31,7 @@ def teachers_login(request):
                     request.session['name'] = user.name
                     request.session['subject'] = user.subject
                     subject = user.subject
-                    return render(request, 'section.html',)
+                    return redirect('/sections')
                 else:
                     return render(request, 'teacherlogin.html', {'form': form,
                                                                  'error': 'Wrong Password'})
@@ -620,6 +622,7 @@ def auth_change(request):
         else:
             return HttpResponse("no user found with name : ", name)
 
+
 def dept_login(request):
     if request.method == "POST":
         form = Teachers_login(request.POST)
@@ -865,14 +868,14 @@ def modify_attendance(request):
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Present',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                         else:
                             user.status = False
                             user.save()
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Absent',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                     else:
                         return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
                                             ' or no attendance marked today</b></h1></center>')
@@ -885,14 +888,14 @@ def modify_attendance(request):
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Present',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                         else:
                             user.status = False
                             user.save()
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Absent',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                     else:
                         return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
                                             ' or no attendance marked today</b></h1></center>')
@@ -905,14 +908,14 @@ def modify_attendance(request):
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Present',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                         else:
                             user.status = False
                             user.save()
                             return render(request, 'modify_attendance.html', {'success': True,
                                                                               'student': roll_no,
                                                                               'status': 'Absent',
-                                                                              'subject': subject})
+                                                                              'subject': subject + " lab"})
                     else:
                         return HttpResponse('<center><h1><b>oops!, This roll number is not valid'
                                             ' or no attendance marked today</b></h1></center>')
@@ -922,6 +925,7 @@ def modify_attendance(request):
                                         'subject has no lab. please try again later</b></h1></center>')
 
         elif request.method == "GET":
+            print("Teacher going to update attendance", request.session['name'])
             return render(request, 'modify_attendance.html', {})
     else:
         return render(request, 'Error.html', {'login_error': True})
@@ -930,3 +934,11 @@ def modify_attendance(request):
 def logout(request):
     request.session.flush()
     return redirect("/")
+
+
+def sections(request):
+    if request.session.has_key('name'):
+        return render(request, 'section.html', {})
+    else:
+        return render(request, 'Error.html', {'login_error': True})
+

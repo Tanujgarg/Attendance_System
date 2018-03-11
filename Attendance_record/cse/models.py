@@ -50,6 +50,7 @@ class EIT(models.Model):
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
 
+
 class CD(models.Model):
     roll_no = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
@@ -57,6 +58,7 @@ class CD(models.Model):
 
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
+
 
 class BIE(models.Model):
     roll_no = models.CharField(max_length=255)
@@ -66,6 +68,7 @@ class BIE(models.Model):
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
 
+
 class SE(models.Model):
     roll_no = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
@@ -73,6 +76,7 @@ class SE(models.Model):
 
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
+
 
 class MC(models.Model):
     roll_no = models.CharField(max_length=255)
@@ -82,6 +86,7 @@ class MC(models.Model):
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
 
+
 class WTLab(models.Model):
     roll_no = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
@@ -90,6 +95,7 @@ class WTLab(models.Model):
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
 
+
 class EITLab(models.Model):
     roll_no = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
@@ -97,6 +103,7 @@ class EITLab(models.Model):
 
     def __str__(self):
         return self.roll_no + '_' + str(self.date)
+
 
 class SELab(models.Model):
     roll_no = models.CharField(max_length=255)

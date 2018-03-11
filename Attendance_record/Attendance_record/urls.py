@@ -20,7 +20,7 @@ handler404 = 'cse.views.error'
 handler500 = 'cse.views.error'
 
 urlpatterns = [
-    path('i_am_admin/', admin.site.urls),
+    path('H_Tanu_Garg/', admin.site.urls),
     path('teacherlogin', teachers_login),
     path('studentlogin', student_login),
     path('', index),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('authchange', auth_change),
     path('change', pas_chng),
     path('update', modify_attendance),
-    path('logout', logout)
+    path('logout', logout),
+    path('sections', sections)
 ]
